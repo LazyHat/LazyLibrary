@@ -5,7 +5,7 @@ int main()
 {
     SetCPConsole(1251);
     String k("Hello");
-    String s("Hello");
+    String s("He3lo");
     cout << (k == s);
     return 0;
 }

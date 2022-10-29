@@ -109,6 +109,18 @@ char &String::operator[](const int &index)
 }
 bool String::operator==(const String &obj)
 {
+    int thislength = this->Size();
+    if (thislength != StrSize(obj.s))
+        return 0;
+    else
+    {
+        for (int i = 0; i < thislength; i++)
+        {
+            if (this->s[i] != obj.s[i])
+                return 0;
+        }
+        return 1;
+    }
 }
 #pragma endregion
 int String::Size()
