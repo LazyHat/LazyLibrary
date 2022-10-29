@@ -1,3 +1,8 @@
 // LAZY LIBRARY CPP FILE
 // HEADERS
-#include "String.cpp" //MY STRING LIBRARY
+#include "String.cpp"
+// MY STRING LIBRARY
+//  INCLUDED
+//  IOSTREAM
+//  FSTREAM
+//  WINDOWS.h
