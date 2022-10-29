@@ -1,12 +1,14 @@
 #include <Windows.h>
-#include "string.cpp"
+#include "LazyLib.cpp"
 
 int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    string k = string("sdggds");
-    std::cout << k << std::endl;
+    String k = "stfgsdfsd";
+    String z = "sedgsd";
+    k = z;
+    k.PrintL();
     std::cout << k.Size();
     return 0;
 }

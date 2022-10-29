@@ -4,16 +4,18 @@
 #include <algorithm>
 #include <stdlib.h>
 
-class string
+class String
 {
 private:
     char *s;
-    int size;
 
 public:
-    string();
-    string(const char *str);
-    ~string();
+    String();
+    String(const char *str);
+    ~String();
     int Size();
-    friend std::ostream &operator<<(std::ostream &out, string &str);
+    void Print();
+    void PrintL();
+    friend std::ostream &operator<<(std::ostream &out, String &str);
+    String &operator=(const String &str);
 };
