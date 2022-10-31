@@ -17,10 +17,13 @@ public:
     int Size();
     void Print();
     void PrintL();
+    bool Contains(const char &symbol);
+    bool Contains(const String &obj);
     friend std::ostream &operator<<(std::ostream &out, const String &obj);
     friend std::istream &operator>>(std::istream &in, String &obj);
     friend String ToString(const int &num);
     String &operator=(const String &&obj);
+    String &operator=(const String &obj);
     String operator+(const String &obj);
     String operator+(const char *str);
     String operator+(const int &num);

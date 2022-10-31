@@ -48,13 +48,25 @@ std::ostream &operator<<(std::ostream &out, const String &obj)
 }
 std::istream &operator>>(std::istream &in, String &obj)
 {
-    in >> obj.s;
+    // in >> obj.s;
     return in;
 }
 String &String::operator=(const String &&obj)
 {
     this->s = obj.s;
     return *this;
+}
+String &String::operator=(const String &obj)
+{
+    int length = StrSize(obj.s);
+    String result;
+    result.s = new char(length + 1); // + '\0'
+    for (int i = 0; i < length; i++)
+    {
+        result.s[i] = obj.s[i];
+    }
+    result.s[length] = '\0';
+    return result;
 }
 String String::operator+(const String &obj)
 {
@@ -87,6 +99,7 @@ String String::operator+(const char *str)
     {
         sumobj.s[i + length1] = str[i];
     }
+    sumobj.s[length1 + length2] = '\0';
     return sumobj;
 }
 String String::operator+(const int &num)
@@ -109,6 +122,17 @@ char &String::operator[](const int &index)
 }
 bool String::operator==(const String &obj)
 {
+    if (int len = this->Size() == StrSize(obj.s))
+    {
+        for (int i = 0; i < len; i++)
+        {
+            if (this->s[i] != obj.s[i])
+                return false;
+        }
+        return true;
+    }
+    else
+        return false;
 }
 #pragma endregion
 int String::Size()
@@ -122,6 +146,43 @@ void String::Print()
 void String::PrintL()
 {
     std::cout << *this << "\n";
+}
+bool String::Contains(const char &symbol)
+{
+    for (int i = 0; i < this->Size(); i++)
+    {
+        if (this->s[i] == symbol)
+            return true;
+    }
+    return false;
+}
+bool String::Contains(const String &obj)
+{
+    if (this->Size() < StrSize(obj.s))
+        return false;
+    else
+    {
+        for (int i = 0; i < this->Size(); i++)
+        {
+            bool stopflag = false;
+            if (this->s[i] == obj.s[0])
+            {
+                for (int j = i; j < i + StrSize(obj.s); j++)
+                {
+                    if (this->s[j] != obj.s[j])
+                    {
+                        stopflag = true;
+                        break;
+                    }
+                }
+                if (!stopflag)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 String ToString(const int &num)
 {

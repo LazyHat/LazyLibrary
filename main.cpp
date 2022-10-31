@@ -5,7 +5,19 @@ int main()
 {
     SetCPConsole(1251);
     String k("Hello");
-    String s("Hello");
-    cout << (k == s);
+    String s("World!");
+    String z(k + " " + s);
+    String j;
+    j = k;
+    z.PrintL();
+    if (z.Contains("Hellow"))
+    {
+        cout << "str contains in a z";
+    }
+    else
+    {
+        cout << "str not contains in a z";
+    }
+    cout << endl;
     return 0;
 }
