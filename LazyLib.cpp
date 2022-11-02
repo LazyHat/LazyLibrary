@@ -1,3 +1,4 @@
+#pragma once
 // LAZY LIBRARY CPP FILE
 // HEADERS
 #include "String.cpp"
@@ -6,3 +7,4 @@
 //  IOSTREAM
 //  FSTREAM
 //  WINDOWS.h
+//  LazyExeptions.cpp
