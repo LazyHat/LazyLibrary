@@ -1,3 +1,4 @@
+#pragma once
 #include "String.h"
 
 #pragma region PROTOTYPES
@@ -11,6 +12,8 @@ String::String()
 }
 String::String(const char *str)
 {
+    if (str == nullptr)
+        throw StringExeption("Exep: String(const char *str): str is nullptr");
     int length = StrSize(str);
     s = new char[length + 1];
     for (int i = 0; i < length; i++)
@@ -51,9 +54,10 @@ std::istream &operator>>(std::istream &in, String &obj)
     // in >> obj.s;
     return in;
 }
-String &String::operator=(const String &&obj)
+String &String::operator=(String &&obj)
 {
     this->s = obj.s;
+    obj.s = nullptr;
     return *this;
 }
 String &String::operator=(const String &obj)
@@ -113,12 +117,21 @@ String &String::operator+=(const String &obj)
 }
 char &String::operator[](const int &index)
 {
+    if (abs(index) > this->Size())
+        throw StringExeption("Exep: operator[const int &index]: index out of range.");
     if (index >= 0)
         return this->s[index];
     else
     {
         return this->s[this->Size() + index];
     }
+}
+int String::operator[](const char &index)
+{
+    for (int i = 0; i < this->Size(); i++)
+        if (this->s[i] == index)
+            return i;
+    throw StringExeption("Exep: operator[const char &index]: index out of line.");
 }
 bool String::operator==(const String &obj)
 {
@@ -217,6 +230,10 @@ String ToString(const int &num)
         }
     }
     return strnum;
+}
+char *String::ToArray() const
+{
+    return this->s;
 }
 int StrSize(const char *str)
 {
