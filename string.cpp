@@ -37,6 +37,18 @@ String::String(String &&obj)
     this->s = obj.s;
     obj.s = nullptr;
 }
+String::String(int length, bool EOL)
+{
+    if (EOL)
+    {
+        this->s = new char[length + 1];
+        this->s[length] = '\0';
+    }
+    else
+    {
+        this->s = new char[length];
+    }
+}
 String::~String()
 {
     delete[] s;

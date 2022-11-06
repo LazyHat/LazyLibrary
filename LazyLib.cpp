@@ -2,6 +2,7 @@
 // LAZY LIBRARY CPP FILE
 // HEADERS
 #include "String.cpp"
+#include "byte.cpp"
 // MY STRING LIBRARY
 //  INCLUDED
 //  IOSTREAM

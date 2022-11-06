@@ -15,6 +15,7 @@ public:
     String(const char &str);
     String(const String &obj);
     String(String &&obj);
+    String(int length, bool EOL);
     ~String();
     int Size();
     void Print();
