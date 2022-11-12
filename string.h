@@ -4,53 +4,52 @@
 #include <fstream>
 #include <windows.h>
 
-class String
+class string
 {
 private:
     char *s;
 
 public:
-    String();
-    String(const char *str);
-    String(const char &str);
-    String(const String &obj);
-    String(String &&obj);
-    String(int length, bool EOL);
-    ~String();
+    string();
+    string(const char *str);
+    string(const char &str);
+    string(const string &obj);
+    string(string &&obj);
+    ~string();
     int Size();
     void Print();
     void PrintL();
     bool Contains(const char &symbol);
-    bool Contains(const String &obj);
-    friend std::ostream &operator<<(std::ostream &out, const String &obj);
-    friend std::istream &operator>>(std::istream &in, String &obj);
-    friend String ToString(const int &num);
+    bool Contains(const string &obj);
+    friend std::ostream &operator<<(std::ostream &out, const string &obj);
+    friend std::istream &operator>>(std::istream &in, string &obj);
+    friend string ToString(const int &num);
     char *ToArray() const;
-    String &operator=(String &&obj);
-    String &operator=(const String &obj);
-    String operator+(const String &obj);
-    String operator+(const char *str);
-    String operator+(const int &num);
-    String &operator+=(const String &obj);
+    string &operator=(string &&obj);
+    string &operator=(const string &obj);
+    string operator+(const string &obj);
+    string operator+(const char *str);
+    string operator+(const int &num);
+    string &operator+=(const string &obj);
     char &operator[](const int &index);
     int operator[](const char &index);
-    bool operator==(const String &obj);
+    bool operator==(const string &obj);
 };
 
-class StringExeption
+class stringExeption
 {
-    String error;
+    string error;
 
 public:
-    StringExeption(const char *errormessage)
+    stringExeption(const char *errormessage)
     {
-        error = String(errormessage);
+        error = string(errormessage);
     }
-    ~StringExeption()
+    ~stringExeption()
     {
         error = "";
     }
-    String GetError() const
+    string GetError() const
     {
         return error;
     }

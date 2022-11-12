@@ -1,19 +1,19 @@
 #pragma once
-#include "String.h"
+#include "string.h"
 
 #pragma region PROTOTYPES
 int StrSize(const char *str);
 #pragma endregion
 #pragma region CONSTRUCTORS AND DESTRUCTORS
-String::String()
+string::string()
 {
     s = new char[1];
     s[0] = '\0';
 }
-String::String(const char *str)
+string::string(const char *str)
 {
     if (str == nullptr)
-        throw StringExeption("Exep: String(const char *str): str is nullptr");
+        throw stringExeption("Exep: string(const char *str): str is nullptr");
     int length = StrSize(str);
     s = new char[length + 1];
     for (int i = 0; i < length; i++)
@@ -22,7 +22,7 @@ String::String(const char *str)
     }
     s[length] = '\0';
 }
-String::String(const String &obj)
+string::string(const string &obj)
 {
     int length = StrSize(obj.s);
     s = new char[length];
@@ -32,61 +32,49 @@ String::String(const String &obj)
     }
     s[length] = '\0';
 }
-String::String(String &&obj)
+string::string(string &&obj)
 {
     this->s = obj.s;
     obj.s = nullptr;
 }
-String::String(int length, bool EOL)
-{
-    if (EOL)
-    {
-        this->s = new char[length + 1];
-        this->s[length] = '\0';
-    }
-    else
-    {
-        this->s = new char[length];
-    }
-}
-String::~String()
+string::~string()
 {
     delete[] s;
 }
 #pragma endregion
 #pragma region FUNCTIONS
 #pragma region OPERATORS
-std::ostream &operator<<(std::ostream &out, const String &obj)
+std::ostream &operator<<(std::ostream &out, const string &obj)
 {
     out << obj.s;
     return out;
 }
-std::istream &operator>>(std::istream &in, String &obj)
+std::istream &operator>>(std::istream &in, string &obj)
 {
     // in >> obj.s;
     return in;
 }
-String &String::operator=(String &&obj)
+string &string::operator=(string &&obj)
 {
     this->s = obj.s;
     obj.s = nullptr;
     return *this;
 }
-String &String::operator=(const String &obj)
+string &string::operator=(const string &obj)
 {
     int length = StrSize(obj.s);
-    String result;
-    result.s = new char(length + 1); // + '\0'
+    this->s = new char(length + 1); // + '\0'
     for (int i = 0; i < length; i++)
     {
-        result.s[i] = obj.s[i];
+        this->s[i] = obj.s[i];
     }
-    result.s[length] = '\0';
-    return result;
+    this->s[length] = '\0';
+
+    return *this;
 }
-String String::operator+(const String &obj)
+string string::operator+(const string &obj)
 {
-    String sumobj;
+    string sumobj;
     int length1 = this->Size();
     int length2 = StrSize(obj.s);
     sumobj.s = new char[length1 + length2 + 1]; // Plus '\0'
@@ -101,9 +89,9 @@ String String::operator+(const String &obj)
     sumobj.s[length1 + length2] = '\0';
     return sumobj;
 }
-String String::operator+(const char *str)
+string string::operator+(const char *str)
 {
-    String sumobj;
+    string sumobj;
     int length1 = this->Size();
     int length2 = StrSize(str);
     sumobj.s = new char[length1 + length2 + 1]; // Plus '\0'
@@ -118,19 +106,19 @@ String String::operator+(const char *str)
     sumobj.s[length1 + length2] = '\0';
     return sumobj;
 }
-String String::operator+(const int &num)
+string string::operator+(const int &num)
 {
     return *this + ToString(num);
 }
-String &String::operator+=(const String &obj)
+string &string::operator+=(const string &obj)
 {
     *this = *this + obj;
     return *this;
 }
-char &String::operator[](const int &index)
+char &string::operator[](const int &index)
 {
     if (abs(index) > this->Size())
-        throw StringExeption("Exep: operator[const int &index]: index out of range.");
+        throw stringExeption("Exep: operator[const int &index]: index out of range.");
     if (index >= 0)
         return this->s[index];
     else
@@ -138,14 +126,14 @@ char &String::operator[](const int &index)
         return this->s[this->Size() + index];
     }
 }
-int String::operator[](const char &index)
+int string::operator[](const char &index)
 {
     for (int i = 0; i < this->Size(); i++)
         if (this->s[i] == index)
             return i;
-    throw StringExeption("Exep: operator[const char &index]: index out of line.");
+    throw stringExeption("Exep: operator[const char &index]: index out of line.");
 }
-bool String::operator==(const String &obj)
+bool string::operator==(const string &obj)
 {
     if (int len = this->Size() == StrSize(obj.s))
     {
@@ -160,19 +148,19 @@ bool String::operator==(const String &obj)
         return false;
 }
 #pragma endregion
-int String::Size()
+int string::Size()
 {
     return StrSize(s);
 }
-void String::Print()
+void string::Print()
 {
     std::cout << *this;
 }
-void String::PrintL()
+void string::PrintL()
 {
     std::cout << *this << "\n";
 }
-bool String::Contains(const char &symbol)
+bool string::Contains(const char &symbol)
 {
     for (int i = 0; i < this->Size(); i++)
     {
@@ -181,7 +169,7 @@ bool String::Contains(const char &symbol)
     }
     return false;
 }
-bool String::Contains(const String &obj)
+bool string::Contains(const string &obj)
 {
     if (this->Size() < StrSize(obj.s))
         return false;
@@ -209,11 +197,11 @@ bool String::Contains(const String &obj)
     }
     return false;
 }
-String ToString(const int &num)
+string ToString(const int &num)
 {
     char numbers[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     char symbols[] = {'-'};
-    String strnum;
+    string strnum;
     int length = 0;
     for (int i = num; i != 0; i /= 10)
         length++;
@@ -243,7 +231,7 @@ String ToString(const int &num)
     }
     return strnum;
 }
-char *String::ToArray() const
+char *string::ToArray() const
 {
     return this->s;
 }
@@ -260,9 +248,9 @@ void SetCPConsole(int cp)
     SetConsoleOutputCP(cp);
 }
 #pragma region FILE_FSTREAM
-String GetStrLine(std::ifstream &file)
+string GetStrLine(std::ifstream &file)
 {
-    return String("GetStrLine()");
+    return string("GetStrLine()");
 }
 #pragma endregion
 #pragma endregion

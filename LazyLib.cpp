@@ -1,8 +1,7 @@
 #pragma once
 // LAZY LIBRARY CPP FILE
 // HEADERS
-#include "String.cpp"
-#include "byte.cpp"
+#include "string.cpp"
 // MY STRING LIBRARY
 //  INCLUDED
 //  IOSTREAM
